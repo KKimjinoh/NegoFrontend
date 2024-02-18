@@ -1,0 +1,43 @@
+/*------------------------------------*\
+    #COLORS
+\*------------------------------------*/
+
+// 테마, 기본 배경 색
+$color-bg: #F4F9FF;
+
+// 무채색
+$color-white: #fff;
+$color-grey01: #b2b2b2;
+$color-grey02: #fafafa;
+$color-grey03: #999999;
+$color-black: #000;
+
+// 유채색
+$color-red: #F00E0F;
+$color-light-red: #FFEEF0;
+$color-green: #0ACC40;
+$color-light-green: #D9FFE2;
+
+// 버튼
+$color-button: #F00E0F;
+
+
+
+
+/*------------------------------------*\
+    #TYPOGRAPHY
+\*------------------------------------*/
+
+/* 1rem === 16px 기준 */
+
+$font-family: 'Roboto';
+$font-size-small:12px;
+$font-size-regular:14px;
+
+
+/*------------------------------------*\
+    #SIZES
+\*------------------------------------*/
+// border-radius
+$border-radius01: 5px;
+$border-radius02: 30px;
