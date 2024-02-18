@@ -1,0 +1,29 @@
+#root{
+    background-color: #dfdfdef5;
+    height: 180vh;
+    padding: 30px;
+  
+  }
+  
+  .App {
+    background-color: white;
+    margin: auto;
+    width: 500px;
+    height: 90%; 
+    padding: 20px 10px;
+    text-align: center; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }
+
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
