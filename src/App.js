@@ -1,10 +1,10 @@
 import {Route, Routes } from 'react-router-dom';
-import AddItem from '../src/pages/AddItem';
-import ChatList from '../src/pages/ChatList';
-import Home from '../src/pages/Home';
-import SignUp from '../src/pages/SignUp';
-import Login from '../src/pages/Login'
-import NotFound from './pages/NotFount';
+import Home from './pages/Home/Home';
+import AddItem from './pages/AddItem/AddItem'
+import ChatList from './pages/ChatList/ChatList'
+import SignUp from './pages/SignUp/SignUp';
+import Login from './pages/Login/Login'
+import NotFound from './pages/NotFound/NotFound'
 import './App.css';
 
 function App() {

@@ -1,0 +1,62 @@
+.login{
+    
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .loginExplain{
+        width: 305px;
+        height: 400px;
+        background-color: rgb(255, 255, 255);
+        font-size: 30px;
+        flex-direction: row;
+        text-align: center;
+        position: relative;
+        margin-top: 90px;
+        .loginExplainImg{
+            width: 300px;
+            height: 300px;
+            // background-image:url("../assets/images/login_img.png");
+            background-image: url("../../assets/Shakehand.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: auto;
+        }
+    }
+    .loginTwoway{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 305px;
+        height: 305px;
+        background-color: rgb(255, 255, 255);
+        position: relative;
+        .TwoLogin{
+            width: 330px;
+            height: 40px;
+            background-color: beige;
+            border-radius: 30px;
+            text-align: center;
+            line-height: 40px;
+            margin-bottom: 20px;
+            &:nth-child(1){
+                background-color: yellow;
+            }
+            &:nth-child(2){
+                background-color: #F00E0F
+            }
+        }
+    }
+    .loginToSignUp{
+        width: 305px;
+        height: 305px;
+        text-align: center;
+        position: relative;
+
+    }
+}
+
+

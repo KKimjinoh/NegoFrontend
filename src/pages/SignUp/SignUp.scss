@@ -1,0 +1,30 @@
+.signUp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .signUp .form_SignUp {
+    width: 330px;
+    height: 85px;
+  }
+  .signUp .form_SignUp label {
+    color: #B2B2B2;
+  }
+  .signUp .form_SignUp input {
+    width: 330px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+  }
+  
+  .askSignUp {
+    margin-top: 30px;
+    width: 330px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 30px;
+    text-align: center;
+    background-color: #F00E0F;
+    color: white;
+  }/*# sourceMappingURL=SignUp.css.map */
