@@ -3,6 +3,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: left;
+
   }
   .signUp .form_SignUp {
     width: 330px;
@@ -28,3 +30,15 @@
     background-color: #F00E0F;
     color: white;
   }/*# sourceMappingURL=SignUp.css.map */
+.findAddress{
+  margin-top: 3px;
+  background-color: #e4e4e4;
+  color: #737373;
+  border-radius: 10px;
+  width: 200px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+
+}

@@ -4,7 +4,10 @@ import AddItem from './pages/AddItem/AddItem'
 import ChatList from './pages/ChatList/ChatList'
 import SignUp from './pages/SignUp/SignUp';
 import Login from './pages/Login/Login'
+import FormalLogin from './components/Login/FormalLogin';
+import KakaoLogin from './components/Login/KakaoLogin'
 import NotFound from './pages/NotFound/NotFound'
+import FindAddress from './components/FindAddress/FindAddress';
 import './App.css';
 
 function App() {
@@ -16,6 +19,9 @@ function App() {
         <Route path='/chatlist' element={<ChatList/>} Route/>
         <Route path='/signup' element={<SignUp/>} Route/>
         <Route path='/login' element={<Login/>} />
+        <Route path='/formallogin' element={<FormalLogin/>} />
+        <Route path='/kakaologin' element={<KakaoLogin/>} />
+        <Route path='/findaddress' element={<FindAddress/>} />
         <Route path='*' element={<NotFound/>} />
       </Routes>
     </div>
