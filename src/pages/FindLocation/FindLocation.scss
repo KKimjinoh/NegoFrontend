@@ -1,0 +1,47 @@
+.findLocation {
+    height: 100%;
+
+    .addLeftBtn {
+        width: 30px;
+        height: 30px;
+        border: none;
+        background-color: white;
+
+        img {
+            width: 25px;
+            height: 25px;
+        }
+    }
+    
+    #mapWrapper{
+        margin: 0 auto;
+        height: 800px;
+    }
+
+    .locationWrapper{
+        height: 40px;
+        width: 400px;
+    }
+
+    .mapSubmit{
+        border: none;
+        width: 400px;
+        height: 40px;
+        border-radius: 100px;
+        background-color: red;
+        color: white;
+    }
+
+    .locationWrapper{
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        text-align: left;
+        margin-left: 20px;
+        font-weight: bold;
+
+    }
+
+
+
+}

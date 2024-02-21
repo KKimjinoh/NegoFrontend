@@ -1,0 +1,207 @@
+.AddItem {
+    height: 100%;
+    position: relative;
+    z-index: 1;
+
+    .addLeftBtn {
+        width: 30px;
+        height: 30px;
+        border: none;
+        background-color: white;
+
+        img {
+            width: 25px;
+            height: 25px;
+        }
+    }
+
+    .add_RightBtn {
+        width: 50px;
+        height: 30px;
+        border-radius: 5px;
+        border: none;
+        background-color: red;
+        color: white;
+    }
+
+    .imgDiv {
+        display: flex;
+        width: 400px;
+        margin-left: 50px;
+        margin-bottom: 20px;
+        gap: 10px;
+        flex-wrap: wrap;
+
+
+        label {
+            width: 70px;
+            height: 70px;
+            overflow: hidden;
+        }
+
+        img {
+
+            object-fit: cover;
+
+        }
+
+        .pictureDiv {
+            width: 70px;
+            height: 70px;
+            background-color: rgb(225, 225, 225);
+            border: none;
+            border-radius: 5px;
+
+            img{
+                margin-top: 10px;
+            }
+            .addImage{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .imageLength{
+                color: rgb(183, 183, 183);
+                font-weight: bold;
+       
+            }
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+    }
+
+}
+
+.inputdiv {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+
+    span {
+        margin-bottom: 30px;
+        color: rgb(165, 165, 165);
+        font-weight: bold;
+    }
+
+    input {
+        border: none;
+        border-bottom: 1px solid rgb(165, 165, 165);
+        margin-bottom: 20px;
+    }
+
+    .checkboxA,
+    .checkboxB {
+        display: flex;
+        height: 50px;
+
+        label {
+            display: flex;
+        }
+
+        span {
+            color: black;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .checkboxB {
+            justify-content: space-between;
+        }
+    }
+
+    #inputgray {
+        color: gray;
+        font-size: 13px;
+    }
+
+    textarea {
+        resize: none;
+        height: 300px;
+        border-radius: 5px;
+
+        &::placeholder {
+            font-size: 15px;
+            padding-left: 10px;
+            padding-top: 10px;
+            font-weight: bold;
+            color: rgb(152, 152, 152);
+        }
+    }
+}
+
+.locationDiv {
+    display: flex;
+
+    #locationInput {
+        border: 1px solid rgb(198, 198, 198);
+        margin-left: 80px;
+        width: 280px;
+        height: 30px;
+        border-radius: 10px;
+    }
+}
+
+.searchDiv {
+    display: flex;
+    position: absolute;
+    color: rgb(198, 196, 196);
+    width: 90px;
+    height: 30px;
+    right: 10px;
+    font-size: 15px;
+    font-weight: 100;
+    align-items: center;
+}
+
+.explanationSpan {
+    font-size: 15px;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid red;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+
+    &:checked {
+        background-color: red;
+
+        &::after {
+            content: '\2713';
+            font-size: 16px;
+            color: white;
+            position: relative;
+            top: -4px;
+            left: 2px;
+        }
+    }
+}
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid red;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+
+    &:checked {
+        background-color: red;
+        border: 2px solid red;
+
+    }
+}
