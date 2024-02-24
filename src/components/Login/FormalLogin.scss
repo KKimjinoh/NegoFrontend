@@ -1,29 +1,29 @@
-.signUp {
+.formalLogin {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: left;
-
   }
-  
-  .signUp .form_SignUp {
+
+  .formalLogin .form_FormalLogin {
     width: 330px;
     height: 85px;
+    margin-top: 15px;
   }
 
-  .signUp .form_SignUp label {
+  .formalLogin .form_FormalLogin  label {
     color: #B2B2B2;
   }
 
-  .signUp .form_SignUp input {
+  .formalLogin .form_FormalLogin  input {
     width: 330px;
     border-top: 0px;
     border-left: 0px;
     border-right: 0px;
-  }
-  
-  .askSignUp {
+}
+
+.formalLoginBtn {
     margin-top: 30px;
     width: 330px;
     height: 60px;
@@ -34,14 +34,3 @@
     color: white;
   }
 
-.findAddress{
-  margin-top: 3px;
-  background-color: #e4e4e4;
-  color: #737373;
-  border-radius: 10px;
-  width: 200px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  text-decoration: none;
-}

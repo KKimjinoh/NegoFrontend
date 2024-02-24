@@ -1,13 +1,17 @@
 import axios from "axios"
-export const signUpApi=async (name,email,password,tel,cickname,address)=>{
-    const result=await axios.post("여기에 url설정",{
+export const signUpApi=async (name,email,password,tel,nickname,address)=>{
+    await axios.post("http://kim-sun-woo/api/join",
+    {
         name,
         email,
         password,
         tel,
-        cickname,
+        nickname,
         address
-    }).then(()=>{console.log("s")})
-    .catch(()=>{console.log("F")})
-    return result.data;
+    }
+    // {
+    //     headers:{'Access-control-Allow':'*'} gpt피셜 백엔드에서 작성
+    // }
+    ).then(()=>{console.log("s")})
+    .catch((error)=>{console.log(error)})
 }

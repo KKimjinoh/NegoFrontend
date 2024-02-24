@@ -1,5 +1,5 @@
 import React, { useState } from 'react'; 
-// import { signUpApi } from '../../apis/signUpApi';
+import { signUpApi } from '../../apis/signUpApi';
 import Header from '../../components/Header/Header';
 import { Link } from 'react-router-dom';
 
@@ -14,12 +14,11 @@ const SignUp = () => {
         rePw:'',
         tel:'',
         nickname:'',
-        address:''
+        address:'임의주소'//주소:findAddress로 넘어가서 입력받은 데이터를 input으로 줌
     })
-
+    
     const onClick= ()=>{
-        // signUpApi(form.name,form.email,form.pw,form.tel,form.nickname,form.address);
-        console.log(form.name,form.email,form.pw,form.tel,form.nickname,form.address);
+        signUpApi(form.name,form.email,form.pw,form.tel,form.nickname,form.address);
     }
 
     const [nameErr,setnameErr]=useState("임시로 띄운 에러메세지"); //한 글자 이상
@@ -109,11 +108,11 @@ const SignUp = () => {
                     <div className='findAddress'>
                         <Link className='findAddress' to={'/findAddress'}>우리동네 등록하기</Link>
                     </div>}
-                <input id='address' 
+                    {form.address !=="" &&<input id='address' 
                     name='address' 
                     value={form.address}
                     onChange={e=>setForm({...form,address:e.target.value})} 
-                    />
+                        />}
                 
                 <span>{addressErr}</span>
             </div>
