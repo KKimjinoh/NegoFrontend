@@ -11,15 +11,7 @@ const AddItem = () => {
     const upload = useRef();
     const navgate = useNavigate();
 
-    const [title, setTitle] = useState('');
-    const [category, setCategory] = useState('');
-    const [state, setState] = useState('');
-    const [tag, setTag] = useState('');
-    const [content, setContent] = useState("");
     const [imgFile, setImageFile] = useState([]);
-    const [priceReq, SetPric] = useState(false);
-    const [radio,setRadio] = useState('');
-
     const [address, setAddress] = useState('');
     const [formData, setFormData] = useState({
         title: '',
@@ -29,56 +21,20 @@ const AddItem = () => {
         content: "",
         imgFile: [],
         priceReq: false,
-        radio : '',
+        deliveryFee: '',
         address: ''
     });
 
     const onHandleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-
-        switch (name) {
-            case "title":
-                setTitle(value);
-                break;
-            case "category":
-                setCategory(value);
-                break;
-            case "state":
-                setState(value);
-                break;
-            case "tag":
-                setTag(value);
-                break;
-            case "content":
-                setContent(value);
-                break;
-            
-        }
-
+        const {name, value} = e.target
         setFormData(prevData => ({
             ...prevData,
             [name]: value
         }));
-
-        console.log(`${ "제목"} ${formData.title}`);
-
     };
-
-    const onRadioChange = (e) =>{
-        const value = e.target.value
-        setRadio(e.target.value);
-
-        setFormData(prevData => ({
-            ...prevData,
-            radio: value
-        }));
-    }
 
     const handleCheckboxChange = (e) => {
         const value = e.target.checked;
-        SetPric(e.target.checked);
-
         setFormData(prevData => ({
             ...prevData,
             priceReq: value
@@ -86,28 +42,18 @@ const AddItem = () => {
     }
 
     const onHandleSubmit = async () => {
-        const formData = new FormData();
-        formData.append('title', title);
-        formData.append('category', category);
-        formData.append('state', state);
-        formData.append('tag', tag);
-        formData.append('priceR', priceReq);
-        formData.append('radio',radio);
-        formData.append('content', content);
-
         try {
             axios.put('/AddItem', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            window.localStorage.clear();
+            window
+                .localStorage
+                .clear();
         } catch (error) {
             console.error(error);
         }
-
-
-
     };
 
     const imageUpload = () => {
@@ -116,19 +62,15 @@ const AddItem = () => {
             ...imgFile,
             newImage
         ]);
-    }
 
-    useEffect(() => {
         setFormData(prevData => ({
             ...prevData,
             imgFile: imgFile
         }));
-    }, [imgFile])
+    }
 
     useEffect(() => {
         const savedFormData = localStorage.getItem('formData');
-
-        console.log(JSON.parse(savedFormData));
 
         if (savedFormData) {
             setFormData(JSON.parse(savedFormData));
@@ -137,20 +79,17 @@ const AddItem = () => {
         const address = localStorage.getItem('address');
         if (address) {
             setAddress(address);
-            
+
             setFormData(prevData => ({
                 ...prevData,
                 address: address
             }));
-            
         }
 
     }, []);
 
     useEffect(() => {
-
         localStorage.setItem('formData', JSON.stringify(formData));
-
     }, [formData]);
 
     return (
@@ -234,11 +173,23 @@ const AddItem = () => {
 
                     <div className="checkboxB">
                         <label htmlFor="checkbox2">
-                            <input type="radio" name='deliveryFee' id="checkbox2" value={"include"} checked={formData.radio==="include"} onChange={onRadioChange}/>
+                            <input
+                                type="radio"
+                                name='deliveryFee'
+                                id="checkbox2"
+                                value={"include"}
+                                checked={formData.deliveryFee === "include"}
+                                onChange={onHandleChange}/>
                             <span>배송비포함</span>
                         </label>
                         <label htmlFor="checkbox3">
-                            <input type="radio" name='deliveryFee' id="checkbox3"  value={"sep"} checked={formData.radio==="sep"}  onChange={onRadioChange}/>
+                            <input
+                                type="radio"
+                                name='deliveryFee'
+                                id="checkbox3"
+                                value={"sep"}
+                                checked={formData.deliveryFee === "sep"}
+                                onChange={onHandleChange}/>
                             <span>배송비별도</span>
                         </label>
                         <span id="inputgray">입력</span>
@@ -252,8 +203,11 @@ const AddItem = () => {
                     </div>
 
                     <span className="explanationSpan">상품 설명을 입력해 주세요.</span>
-                    <textarea name='content' onChange={onHandleChange} placeholder="40글자 이상 작성해주세요" defaultValue={formData.content}></textarea>
-
+                    <textarea
+                        name='content'
+                        onChange={onHandleChange}
+                        placeholder="40글자 이상 작성해주세요"
+                        defaultValue={formData.content}></textarea>
                 </div>
 
             </section>
