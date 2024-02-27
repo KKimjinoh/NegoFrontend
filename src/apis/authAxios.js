@@ -1,5 +1,6 @@
 import axios from "axios"
 import { getNewRefreshToken } from "./refresh";
+//인증을 위한 axios api
 export const getAuthAxios=(token)=>{
     //매개변수 token: access토큰
     const accessToken = token;
@@ -11,7 +12,7 @@ export const getAuthAxios=(token)=>{
             //authAxios.get이런식으로 보낸 요청의 헤더에 엑세스토큰이 실리게 된다.
         },
     });
-    
+
     //새로 정의한 authAxios 즉, axios객체에 응답을 설정(중간에 가로챈다.)
     authAxios.interceptors.response.use(
         (res)=>res, //응답이 오류가 없을 경우 , 아무것도 처리하지 않음

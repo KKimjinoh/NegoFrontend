@@ -1,0 +1,69 @@
+@import "../../styles/global.scss";
+.Mypage{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  .MypageHead{
+    margin-top: 100px;
+    width: 390px;
+    height: 75px;
+    display: flex;
+    flex-direction: row;
+    font-size: 18px;
+
+        #Myprofile{
+            background-image: url('../../assets/pantiman.png');
+            background-position: center;
+            width: 75px;
+            height: 75px;
+            border-radius: 50px;
+            margin-right: 20px;
+        }
+        #MyPageName{
+            font-weight: 1000;
+            margin-right: 70px;
+            width: 100px;
+        }
+    }  
+    .MyPageMoney{
+        width: 390px;
+        height: 75px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 30px;
+        font-size: 18px;
+        #pay{
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
+    .MyPageMenu{
+        width: 400px;
+        height: 300px;
+        display: flex;
+        flex-direction: row;
+        justify-content:flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+        align-content:flex-start;
+        .MyPageMenuBundle{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 14px;
+            width: 130px;
+            height: 130px;
+            .MypageMenuBtn
+            {
+                border-radius: 13px;
+                width: 70px;
+                height: 70px;
+                background-color: $color-grey03;
+                margin-bottom: 5px;
+            }
+        }
+        
+    }
+}

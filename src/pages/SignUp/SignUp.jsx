@@ -1,39 +1,62 @@
-import React, { useState } from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import { signUpApi } from '../../apis/signUpApi';
 import Header from '../../components/Header/Header';
 import { Link } from 'react-router-dom';
-
 import './SignUp.scss'
 const SignUp = () => {
     //회원가입 제출 data관리, useState
     //이름 이메일 비밀번호 전화번호 별명 주소
     const [form,setForm]=useState({
         name:'',
-        email:'',
-        pw:'',
-        rePw:'',
+        email:'',//
+        pw:'',//
+        rePw:'',//
         tel:'',
-        nickname:'',
-        address:'임의주소'//주소:findAddress로 넘어가서 입력받은 데이터를 input으로 줌
+        nickname:'',//나중에 post하고 결과로 알려주기
+        address:''//주소:findAddress로 넘어가서 입력받은 데이터를 input으로 줌
     })
-    
+    //email 조건 정규식
+    //pwd 조건: 소문자, 대문자, 숫자, 특수문자(!@#$%)가 꼭 들어있고 8~24글자라는 뜻
+    //"-"을 기준으로, 앞자리 2~3자리, 가운데 3~4자리, 마지막 3~4자리의 숫자로만 이루어진 문자열 체크, -빼면 -빼고 조건 그대로 유지
+    const [validEmail,setValidEmail]=useState(false);
+    const [validPW,setValidPW]=useState(false);
+    const [validRePw,setValidRePw]=useState(false);
+    const [validTel,setValidTel]=useState(false)
+    //유효성검사
+    useEffect(()=>{
+        const EMAIL_REGEX=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const result= EMAIL_REGEX.test(form.email);
+        setValidEmail(result);
+    }, [form.email]);
+
+    useEffect(()=>{
+        const PW_REGEX=/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+        const result=PW_REGEX.test(form.pw);
+        setValidPW(result);
+        const match= form.pw === form.rePw;
+        setValidRePw(match);
+    }, [form.pw, form.rePw]);
+
+    useEffect(()=>{
+        const TEL_REGEX=/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/;
+        const result=TEL_REGEX.test(form.tel);
+        setValidTel(result);
+    },[form.tel]);
+
     const onClick= ()=>{
         signUpApi(form.name,form.email,form.pw,form.tel,form.nickname,form.address);
     }
 
-    const [nameErr,setnameErr]=useState("임시로 띄운 에러메세지"); //한 글자 이상
-    const [emailErr,setEmailErr]=useState("");//이메일 형식
-    const [pwErr,setPwErr]=useState("");//pw유효성
-    const [rePwErr,setRePwErr]=useState("");//pw와 확인
-    const [telErr,setTelErr]=useState("");//올바른 전화번호
-    const [nicknameErr,setNicknameErr]=useState("");//중복 검사
-    const [addressErr,setAddressErr]=useState("");//주소 유효검사
-
+    const emailErr="이메일 형식에 맞게 작성";
+    const pwErr="소문자,대문자,숫자,!@#$%, 총 8~24글자입력"
+    const rePwErr="패스워드와 일치하는지 확인해주세요";
+    const telErr="전화번호 형식에 맞지 않거나, - 이 없습니다."
     return (
         <div className='signUp'>
             <Header headleft={"회원가입"}/>
             {/* 이름 이메일 비밀번호  비밀번호확인 전화번호 닉네임 동네찾기/ */}
             <div className='form_SignUp'>
+                {/* <FontAwesomeIcon icon={faCheck}/> */}
                 <label htmlFor="name">이름</label>
                 <input 
                     id='name' 
@@ -42,7 +65,7 @@ const SignUp = () => {
                     onChange={
                         e=>setForm({...form,name:e.target.value})} 
                 />
-                <span>{nameErr}</span>
+                {/* <span>{nameErr}</span> */}
             </div>
             <div className='form_SignUp'>
                 <label htmlFor="email">이메일</label>
@@ -52,9 +75,10 @@ const SignUp = () => {
                     name='email'
                     value={form.email} 
                     onChange={e=>setForm({...form,email:e.target.value})} 
+                    placeholder='이메일 형식에 맞게 입력해주세요'
                     />
-                <span>{emailErr}</span>
-
+                {(!validEmail && form.email.length>0)&&<span className='errorMsg'>{emailErr}</span>
+}
             </div>
             <div className='form_SignUp'>
                 <label htmlFor="password">비밀번호</label>
@@ -63,9 +87,10 @@ const SignUp = () => {
                     id='password'
                     name='password'
                     value={form.pw} 
+                    placeholder='소문자, 대문자, 숫자, !@#$%중 하나, 총 8~24글자 입력'
                     onChange={e=>setForm({...form,pw:e.target.value})} 
                     />
-                <span>{pwErr}</span>
+                {(!validPW && form.pw.length>0) && <span className='errorMsg'>{pwErr}</span>}
 
             </div>
             <div className='form_SignUp'>
@@ -75,20 +100,21 @@ const SignUp = () => {
                     id='rePassword' 
                     name='rePassword' 
                     value={form.rePw} 
+                    placeholder='위에서 입력한 비밀번호와 동일하게 입력'
                     onChange={e=>setForm({...form,rePw:e.target.value})} 
                 />
-                <span>{rePwErr}</span>
+                {(!validRePw && form.rePw.length>0) && <span className='errorMsg'>{rePwErr}</span>}
 
             </div>
             <div className='form_SignUp'>
-                <label htmlFor="tel">전화번호 ( -제외 ) </label>
+                <label htmlFor="tel">전화번호 ( - 필수 ) </label>
                 <input 
                     id='tel'
                     name='tel'
                     value={form.tel}
                     onChange={e=>setForm({...form,tel:e.target.value})} 
                 />
-                <span>{telErr}</span>
+                {(!validTel && form.tel.length>0) &&<span className='errorMsg'>{telErr}</span>}
 
             </div>
             <div className='form_SignUp'>
@@ -99,7 +125,7 @@ const SignUp = () => {
                     value={form.nickname} 
                     onChange={e=>setForm({...form,nickname:e.target.value})} 
                     />
-                <span>{nicknameErr}</span>
+                {/* <span>{nicknameErr}</span> */}
 
             </div>
             <div className='form_SignUp'>
@@ -114,11 +140,11 @@ const SignUp = () => {
                     onChange={e=>setForm({...form,address:e.target.value})} 
                         />}
                 
-                <span>{addressErr}</span>
+                {/* <span>{addressErr}</span> */}
             </div>
-            <div className='askSignUp' onClick={onClick}>
+            {(validEmail&&validPW&&validRePw&&validTel) &&<div className='askSignUp' onClick={onClick}>
                 회원가입하기
-            </div>
+            </div>}
         </div>
     );
 }; 

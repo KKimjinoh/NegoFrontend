@@ -8,7 +8,12 @@ const Home =()=>{
                     <div>
                         home
                     </div>
-                    <Link to='Login'>Login</Link>                
+                    <Link to='Login'>Login</Link>  
+                    <div>
+                        <Link to='Mypage'>Mypage</Link>       
+                    
+                    </div>     
+ 
                 </div>
             </div>
         </div>

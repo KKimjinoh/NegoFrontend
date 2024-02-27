@@ -5,7 +5,7 @@ export const getNewRefreshToken= async ()=>{
     const refreshToken = localStorage.getItem('refresh');
     const result = await axios.post('url',
         {
-            refreshToken,//body에 refresh토큰 넣음
+            refreshToken,//body에 refresh토큰 넣음,header에 accesstoken을 넣음
         },
         {
             headers:{
