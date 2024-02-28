@@ -15,7 +15,7 @@ const Login = () => {
             <div className='loginTwoway'>
                 <div className='TwoLogin'>
                     <Link className='hasLink' to={'/KakaoLogin'}>
-                        카카오 로그인
+                        카카오톡으로 로그인
                     </Link>
                 </div>
                 <div className='TwoLogin'>

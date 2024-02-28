@@ -11,8 +11,10 @@ const Home =()=>{
                     <Link to='Login'>Login</Link>  
                     <div>
                         <Link to='Mypage'>Mypage</Link>       
-                    
                     </div>     
+                    <div>
+                        <Link to='FindLocation'>findLocation</Link>
+                    </div>
  
                 </div>
             </div>

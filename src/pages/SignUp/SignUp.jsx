@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react'; 
-import { signUpApi } from '../../apis/signUpApi';
-import Header from '../../components/Header/Header';
 import { Link } from 'react-router-dom';
+import Header from '../../components/Header/Header';
+import { signUpApi } from '../../apis/signUpApi';
 import './SignUp.scss'
+import { geolocation } from '../../components/FindLocation/GeoLocation';
 const SignUp = () => {
-    //회원가입 제출 data관리, useState
-    //이름 이메일 비밀번호 전화번호 별명 주소
     const [form,setForm]=useState({
         name:'',
-        email:'',//
-        pw:'',//
-        rePw:'',//
+        email:'',
+        pw:'',
+        rePw:'',
         tel:'',
-        nickname:'',//나중에 post하고 결과로 알려주기
+        nickname:'',//나중에 post하고 결과로 알려주기,아직 구현 못함
         address:''//주소:findAddress로 넘어가서 입력받은 데이터를 input으로 줌
     })
     //email 조건 정규식
@@ -22,6 +21,23 @@ const SignUp = () => {
     const [validPW,setValidPW]=useState(false);
     const [validRePw,setValidRePw]=useState(false);
     const [validTel,setValidTel]=useState(false)
+    //현재위치 localstorage저장
+    useEffect(()=>{
+        geolocation()
+        .then(([lat,lng])=>{
+            localStorage.setItem("lat",lat);
+            localStorage.setItem("lng",lng);
+            }
+        )
+        .catch(error=>{
+            localStorage.setItem("lat",37.88602477209835 );//혹시 geolocation이 안될경우 기본값으로 세팅
+            localStorage.setItem("lng",127.73794321732926);
+            console.log(error);
+        })
+        if(localStorage.getItem("address")){
+            form.address=localStorage.getItem("address");
+        }
+    },[])
     //유효성검사
     useEffect(()=>{
         const EMAIL_REGEX=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -33,7 +49,7 @@ const SignUp = () => {
         const PW_REGEX=/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
         const result=PW_REGEX.test(form.pw);
         setValidPW(result);
-        const match= form.pw === form.rePw;
+        const match= form.pw === form.rePw; 
         setValidRePw(match);
     }, [form.pw, form.rePw]);
 
@@ -54,9 +70,7 @@ const SignUp = () => {
     return (
         <div className='signUp'>
             <Header headleft={"회원가입"}/>
-            {/* 이름 이메일 비밀번호  비밀번호확인 전화번호 닉네임 동네찾기/ */}
             <div className='form_SignUp'>
-                {/* <FontAwesomeIcon icon={faCheck}/> */}
                 <label htmlFor="name">이름</label>
                 <input 
                     id='name' 
@@ -65,7 +79,6 @@ const SignUp = () => {
                     onChange={
                         e=>setForm({...form,name:e.target.value})} 
                 />
-                {/* <span>{nameErr}</span> */}
             </div>
             <div className='form_SignUp'>
                 <label htmlFor="email">이메일</label>
@@ -104,7 +117,6 @@ const SignUp = () => {
                     onChange={e=>setForm({...form,rePw:e.target.value})} 
                 />
                 {(!validRePw && form.rePw.length>0) && <span className='errorMsg'>{rePwErr}</span>}
-
             </div>
             <div className='form_SignUp'>
                 <label htmlFor="tel">전화번호 ( - 필수 ) </label>
@@ -115,7 +127,6 @@ const SignUp = () => {
                     onChange={e=>setForm({...form,tel:e.target.value})} 
                 />
                 {(!validTel && form.tel.length>0) &&<span className='errorMsg'>{telErr}</span>}
-
             </div>
             <div className='form_SignUp'>
                 <label htmlFor="nickname">닉네임</label>
@@ -125,22 +136,18 @@ const SignUp = () => {
                     value={form.nickname} 
                     onChange={e=>setForm({...form,nickname:e.target.value})} 
                     />
-                {/* <span>{nicknameErr}</span> */}
-
             </div>
             <div className='form_SignUp'>
                 <label htmlFor="address">동네찾기</label>
-                    {form.address ==="" &&
+                    
                     <div className='findAddress'>
-                        <Link className='findAddress' to={'/findAddress'}>우리동네 등록하기</Link>
-                    </div>}
+                        <Link className='findAddress' to={'/findlocation'}>우리동네 등록하기</Link>
+                    </div>
                     {form.address !=="" &&<input id='address' 
                     name='address' 
                     value={form.address}
                     onChange={e=>setForm({...form,address:e.target.value})} 
-                        />}
-                
-                {/* <span>{addressErr}</span> */}
+                    />}
             </div>
             {(validEmail&&validPW&&validRePw&&validTel) &&<div className='askSignUp' onClick={onClick}>
                 회원가입하기

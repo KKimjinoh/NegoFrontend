@@ -3,9 +3,9 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-   
     .loginExplain{
-        font-size: 30px;
+        font-size: 28px;
+        font-weight: 800;
         flex-direction: row;
         text-align: center;
         position: relative;
@@ -40,7 +40,6 @@
             text-align: center;
             line-height: 40px;
             margin-bottom: 20px;
-
         }
     }
     .loginToSignUp{
@@ -48,9 +47,11 @@
         height: 305px;
         text-align: center;
         position: relative;
-
+        margin-top: 15px;
     }
     .hasLink{
+        font-size: 18px;
+        font-weight: 600;
         text-decoration: none;
         color: black;
     }
@@ -60,7 +61,6 @@
             margin: 0px;
         }
     }
-   
 }
 
 
