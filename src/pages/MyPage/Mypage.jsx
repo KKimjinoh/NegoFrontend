@@ -1,18 +1,19 @@
 import React from 'react'
-// import { useEffect,useState } from 'react';
-// import { getMyPage } from '../../apis/mypage';
+import { useEffect,useState } from 'react';
+import { getMyPage } from '../../apis/mypage';
 import Header from '../../components/Header/Header';
 import './MyPage.scss'
 const Mypage = () => {
-    // const [data,setData]=useState();
+    const [data,setData]=useState();
     // const [loading, setLoging]=useState(true);//로딩 정보
     
-    // useEffect(()=>{
-    //     getMyPage().then((res)=>{//내 정보 불러오기
-    //         setData(res);
-    //         setLoging(false);
-    //     },[]);
-    // })
+    useEffect(()=>{
+        getMyPage().then((res)=>{//내 정보 불러오기
+            setData(res);
+            console.log(data)
+            // setLoging(false);
+        },[]);
+    })
     // if (loading) return <div>로딩중..</div>
     return (
         <div className='Mypage'>

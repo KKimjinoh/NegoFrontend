@@ -2,22 +2,29 @@ import React, { useState } from 'react';
 import Header from '../Header/Header';
 import './FormalLogin.scss';
 import {formalLoginApi} from '../..//apis/formalLoginApi.js';
-// import { loginApi } from '../../apis/loginApi';
 import { useNavigate } from 'react-router-dom';
 
 const FormalLogin=()=>{
-    const router=useNavigate(); 
+    const router=useNavigate();
     const [loginform,setLoginForm]=useState({
         email:'',
         password:'',
     });
 
     const onClick=async()=>{
-        const result= await formalLoginApi(loginform.email,loginform.password);
-        const {accessToken,refreshToken}=result;// 구조 분할 할당으로 result에있는 두 토큰을 받아온다.
-        localStorage.setItem('access',accessToken);
-        localStorage.setItem('refresh',refreshToken);
-        router('/home');//router을 이용해서 로그인 처리가 완료되면 home으로 이동
+        try{
+            const result= await formalLoginApi(loginform.email,loginform.password);
+            // const {accessToken,refreshToken}=result;// 구조 분할 할당으로 result에있는 두 토큰을 받아온다.
+            const accessToken=result[0];
+            const refreshToken=result[1];
+            localStorage.setItem('access',accessToken);
+            localStorage.setItem('refresh',refreshToken);
+            console.log("로그인 완료, 로컬스토리지에서 토큰을 확인해주세요")
+            router('/');
+        }
+        catch(error){
+            console.log("login실패",error);
+        }
     }
 
     return(
@@ -35,7 +42,7 @@ const FormalLogin=()=>{
             <div className='form_FormalLogin'>
                 <label htmlFor="password">비밀번호</label>
                 <input 
-                type='password'
+                    type='password'
                     id='password'
                     name='password'
                     value={loginform.password}

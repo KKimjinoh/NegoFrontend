@@ -6,9 +6,9 @@ export const getAuthAxios=(token)=>{
     const accessToken = token;
 
     const authAxios=axios.create({ //새로운 axios 정의 
-        baseURL:'http://sdfsd.com',
+        baseURL:'http://localhost:8080/members',
         headers:{
-            Authorization: accessToken, 
+            Authorization: accessToken,
             //authAxios.get이런식으로 보낸 요청의 헤더에 엑세스토큰이 실리게 된다.
         },
     });
@@ -17,7 +17,7 @@ export const getAuthAxios=(token)=>{
     authAxios.interceptors.response.use(
         (res)=>res, //응답이 오류가 없을 경우 , 아무것도 처리하지 않음
         async (error)=>{ //응답에 오류가 있을 경우
-            if(error.response.status ===401){//401 error가 발생: 토큰이 만료됨
+            if(error.response.status === 401){//401 error가 발생: 토큰이 만료됨
                 const {accessToken,refreshToken}=await getNewRefreshToken(); //refresh토큰을 새로 받아옴
                 error.config.headers.Authorization = accessToken; //새로 받아온 access를 에러가 난 config의 헤더에 담아준다
                 localStorage.setItem('access',accessToken);
