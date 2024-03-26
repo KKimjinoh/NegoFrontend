@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'; 
-import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import { signUpApi } from '../../apis/signUpApi';
-import './SignUp.scss'
 import { geolocation } from '../../components/FindLocation/GeoLocation';
+import FindLocation from '../../components/FindLocation/FindLocation.jsx'
+import './SignUp.scss'
+
+
 const SignUp = () => {
     const [form,setForm]=useState({
         name:'',
@@ -13,14 +15,14 @@ const SignUp = () => {
         tel:'',
         nickname:'',//나중에 post하고 결과로 알려주기,아직 구현 못함
         address:''//주소:findAddress로 넘어가서 입력받은 데이터를 input으로 줌
-    })
+    });
     //email 조건 정규식
     //pwd 조건: 소문자, 대문자, 숫자, 특수문자(!@#$%)가 꼭 들어있고 8~24글자라는 뜻
     //"-"을 기준으로, 앞자리 2~3자리, 가운데 3~4자리, 마지막 3~4자리의 숫자로만 이루어진 문자열 체크, -빼면 -빼고 조건 그대로 유지
     const [validEmail,setValidEmail]=useState(false);
     const [validPW,setValidPW]=useState(false);
     const [validRePw,setValidRePw]=useState(false);
-    const [validTel,setValidTel]=useState(false)
+    const [validTel,setValidTel]=useState(false);
     //현재위치 localstorage저장
     useEffect(()=>{
         geolocation()
@@ -139,16 +141,13 @@ const SignUp = () => {
             </div>
             <div className='form_SignUp'>
                 <label htmlFor="address">동네찾기</label>
-                    
-                    <div className='findAddress'>
-                        <Link className='findAddress' to={'/findlocation'}>우리동네 등록하기</Link>
-                    </div>
                     {form.address !=="" &&<input id='address' 
                     name='address' 
                     value={form.address}
                     onChange={e=>setForm({...form,address:e.target.value})} 
                     />}
             </div>
+            <FindLocation/>
             {(validEmail&&validPW&&validRePw&&validTel) &&<div className='askSignUp' onClick={onClick}>
                 회원가입하기
             </div>}

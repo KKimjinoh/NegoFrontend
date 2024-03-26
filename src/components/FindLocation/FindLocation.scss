@@ -1,6 +1,6 @@
 .findLocation {
     height: 100%;
-
+    
     .addLeftBtn {
         width: 30px;
         height: 30px;
@@ -15,7 +15,7 @@
     
     #mapWrapper{
         margin: 0 auto;
-        height: 800px;
+        height: 400px;
     }
 
     .locationWrapper{
@@ -28,7 +28,7 @@
         width: 400px;
         height: 40px;
         border-radius: 100px;
-        background-color: red;
+        background-color: rgb(163, 162, 162);
         color: white;
     }
 

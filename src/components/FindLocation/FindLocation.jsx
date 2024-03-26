@@ -1,14 +1,13 @@
-import React from "react";
-// import Header from "../../components/Header/Header";
-// import backImg from '../../assets/backIcon.png'
+import React,{ useEffect,useState } from "react";
+import {useDispatch } from "react-redux";
+import {saveLocation} from "../../redux/actions"
 import './FindLocation.scss'
-import { useEffect,useState } from "react";
-import { useNavigate  } from "react-router-dom";
+
 const {kakao} = window;
 
 const FindLocation = () => {
-    const navigator = useNavigate();
-
+    const dispatch=useDispatch();
+    
     const localLat=localStorage.getItem("lat");
     const localLng=localStorage.getItem("lng");
 
@@ -21,7 +20,7 @@ const FindLocation = () => {
 
     const onHandleClick = () =>{
         localStorage.setItem('address',address);
-        navigator(-1);
+        dispatch(saveLocation({lat,lng,address}));
     }
     
     useEffect(()=>{
@@ -79,7 +78,7 @@ const FindLocation = () => {
             <div className="locationWrapper">
                 {address}
             </div>
-            <button className="mapSubmit" onClick={onHandleClick}>완료</button>
+            <button className="mapSubmit" onClick={onHandleClick}>위치등록하기</button>
         </div>
     );
 };
