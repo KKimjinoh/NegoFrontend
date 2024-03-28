@@ -31,6 +31,7 @@ const FindLocation = () => {
         };
         const map = new kakao.maps.Map(container, options);
         setMaps(map);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
 
     useEffect(()=>{

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'; 
 import Header from '../../components/Header/Header';
 import { signUpApi } from '../../apis/signUpApi';
-import { geolocation } from '../../components/FindLocation/GeoLocation';
 import FindLocation from '../../components/FindLocation/FindLocation.jsx'
 import './SignUp.scss'
-
-
+import { useSelector } from 'react-redux';
+//하위컴포넌트 FindLocation에서 클릭-> store업데이트 상위컴포넌트 SignUp에서 바뀐 주소를 확인하여 폼에 최신화 
 const SignUp = () => {
+    const newLat=useSelector((state)=>state.location.lat);
+    const newLng=useSelector((state)=>state.location.lng);
+    const newAddress=useSelector((state)=>state.location.address);
+    
     const [form,setForm]=useState({
         name:'',
         email:'',
@@ -16,6 +19,11 @@ const SignUp = () => {
         nickname:'',//나중에 post하고 결과로 알려주기,아직 구현 못함
         address:''//주소:findAddress로 넘어가서 입력받은 데이터를 input으로 줌
     });
+    useEffect(()=>{
+        console.log("*******",newLat,newLng,newAddress);
+        form.address=newAddress
+        console.log(form.address)
+    },[newAddress])
     //email 조건 정규식
     //pwd 조건: 소문자, 대문자, 숫자, 특수문자(!@#$%)가 꼭 들어있고 8~24글자라는 뜻
     //"-"을 기준으로, 앞자리 2~3자리, 가운데 3~4자리, 마지막 3~4자리의 숫자로만 이루어진 문자열 체크, -빼면 -빼고 조건 그대로 유지
@@ -23,24 +31,7 @@ const SignUp = () => {
     const [validPW,setValidPW]=useState(false);
     const [validRePw,setValidRePw]=useState(false);
     const [validTel,setValidTel]=useState(false);
-    //현재위치 localstorage저장
-    useEffect(()=>{
-        geolocation()
-        .then(([lat,lng])=>{
-            localStorage.setItem("lat",lat);
-            localStorage.setItem("lng",lng);
-            }
-        )
-        .catch(error=>{
-            localStorage.setItem("lat",37.88602477209835 );//혹시 geolocation이 안될경우 기본값으로 세팅
-            localStorage.setItem("lng",127.73794321732926);
-            console.log(error);
-        })
-        if(localStorage.getItem("address")){
-            form.address=localStorage.getItem("address");
-        }
-    },[])
-    //유효성검사
+
     useEffect(()=>{
         const EMAIL_REGEX=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const result= EMAIL_REGEX.test(form.email);
@@ -142,8 +133,8 @@ const SignUp = () => {
             <div className='form_SignUp'>
                 <label htmlFor="address">동네찾기</label>
                     {form.address !=="" &&<input id='address' 
-                    name='address' 
-                    value={form.address}
+                    name='address'
+                    value={newAddress}
                     onChange={e=>setForm({...form,address:e.target.value})} 
                     />}
             </div>
